@@ -3,9 +3,12 @@ import { PrismaClient } from "@prisma/client";
 
 const client = new PrismaClient();
 
-export function GET() {
-    return Response.json({
-        name: "Shelby"
+export async function GET() {
+    const user = await client.user.findFirst();
+
+    return NextResponse.json({
+        id: user.id,
+        email: user?.username
     })
 }
 
